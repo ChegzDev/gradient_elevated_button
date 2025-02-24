@@ -33,7 +33,6 @@ class GradientButtonStyle extends ButtonStyle {
     // super.foregroundBuilder,
   });
 
-
   GradientButtonStyle copyWiths({
     WidgetStateProperty<TextStyle?>? textStyle,
     WidgetStateProperty<Gradient?>? backgroundGradient,

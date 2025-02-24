@@ -1,6 +1,6 @@
 name: gradient_elevated_button
 description: Custom Flutter button with gradient background for visually appealing UI.
-version: 1.0.9
+version: 1.0.10
 homepage: https://github.com/ChegzDev/gradient_elevated_button
 repository: https://github.com/ChegzDev/gradient_elevated_button
 environment:
