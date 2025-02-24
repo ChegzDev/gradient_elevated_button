@@ -1,3 +1,7 @@
+## 1.0.9
+
+* copyWith Error fixed for latest flutter version
+
 ## 1.0.8
 
 * Updated the code to support the latest Flutter version.

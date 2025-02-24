@@ -33,8 +33,8 @@ class GradientButtonStyle extends ButtonStyle {
     // super.foregroundBuilder,
   });
 
-  @override
-  GradientButtonStyle copyWith({
+
+  GradientButtonStyle copyWiths({
     WidgetStateProperty<TextStyle?>? textStyle,
     WidgetStateProperty<Gradient?>? backgroundGradient,
     @Deprecated('Use `backgroundGradient` instead. '
@@ -94,7 +94,6 @@ class GradientButtonStyle extends ButtonStyle {
     );
   }
 
-  // GradientButtonStyle copyWith({required WidgetStatePropertyAll<EdgeInsetsGeometry> padding}) {}
   static GradientButtonStyle? ler(
       GradientButtonStyle? a, GradientButtonStyle? b, double t) {
     if (identical(a, b)) {

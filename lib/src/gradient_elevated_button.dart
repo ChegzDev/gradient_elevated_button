@@ -488,7 +488,7 @@ class _GradientElevatedButtonWithIcon extends GradientElevatedButton {
             const EdgeInsetsDirectional.fromSTEB(8, 0, 4, 0),
             effectiveTextScale,
           );
-    return buttonStyle.copyWith(
+    return buttonStyle.copyWiths(
       padding: WidgetStatePropertyAll<EdgeInsetsGeometry>(scaledPadding),
     );
   }

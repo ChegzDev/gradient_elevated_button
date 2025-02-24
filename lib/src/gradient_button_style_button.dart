@@ -548,7 +548,7 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
               onLongPress: widget.onLongPress,
               onHover: widget.onHover,
               mouseCursor: mouseCursor,
-              enableFeedback: resolvedEnableFeedback,
+              enableFeedback: resolvedEnableFeedback??true,
               focusNode: widget.focusNode,
               canRequestFocus: widget.enabled,
               onFocusChange: widget.onFocusChange,
