@@ -134,6 +134,9 @@ Please file any issues or provide feedback by visiting the [Issues and Feedback]
 
 For suggestions or further feedback, feel free to send an email to __chegz.dev@gmail.com__, and we'd be happy to hear from you!
 
+### Contributors thanks
 
+![contributors](https://contributors-img.firebaseapp.com/image?repo=ChegzDev/gradient_elevated_button)
+<a href="https://github.com/aissat/ChegzDev/gradient_elevated_button/graphs/contributors"></a>
 
 
