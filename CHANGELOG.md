@@ -1,6 +1,7 @@
 ## 1.1.0
 
-Updated for latest Flutter compatibility and minor fixes.
+- Updated for latest Flutter compatibility.
+
 
 ## 1.0.10
 
