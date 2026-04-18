@@ -338,7 +338,9 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
   Widget build(BuildContext context) {
     final GradientButtonStyle? widgetStyle = widget.style;
     final GradientButtonStyle? primaryStyle =
-        GradientButtonThemeData.of(context) ?? widget.themeStyleOf(context);
+        GradientButtonThemeExtension.of(context) ??
+        GradientButtonThemeData.of(context) ?? // fallback for backward compatibility
+        widget.themeStyleOf(context);
     final GradientButtonStyle defaultStyle = widget.defaultStyleOf(context);
     T? effectiveValue<T>(T? Function(GradientButtonStyle? style) getProperty) {
       final T? widgetValue = getProperty(widgetStyle);

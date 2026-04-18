@@ -1,4 +1,3 @@
-
 # GradientElevatedButton
 
 [![Package Version](https://img.shields.io/pub/v/gradient_elevated_button)](https://pub.dartlang.org/packages/gradient_elevated_button)
@@ -41,7 +40,7 @@ A customizable elevated button with gradient support for your Flutter applicatio
 
 - **Gradient Background:** Easily apply gradients to your button backgrounds.
 - **Customizable Style:** Customize text color, shape, padding, and more.
-- **Integration with Theme:** Use `GradientButtonThemeData` to apply a consistent style across your app.
+- **Integration with Theme:** Use `GradientButtonThemeExtension` (via ThemeExtension) to apply a consistent style across your app. (Old: `GradientButtonThemeData` is deprecated)
 
 
 [Demo](https://github.com/ChegzDev/gradient_elevated_button/blob/master/example/lib/main.dart)
@@ -51,37 +50,60 @@ A customizable elevated button with gradient support for your Flutter applicatio
 
 ## Usage
 
-### 1. Using GradientButtonThemeData
+### 1. Theming with ThemeExtension (Recommended)
 
-The `GradientButtonThemeData` allows you to define a consistent button style across your app. Here's how to use it:
+The recommended way to theme all gradient buttons is to use `GradientButtonThemeExtension` with `ThemeData.extensions`:
 
 ```dart
-    main() {
-      return GradientButtonThemeData(
-        data: GradientElevatedButton.styleFrom(
-          gradient: const LinearGradient(
+MaterialApp(
+  theme: ThemeData(
+    extensions: <ThemeExtension<dynamic>>[
+      GradientButtonThemeExtension(
+        style: GradientElevatedButton.styleFrom(
+          backgroundGradient: const LinearGradient(
             colors: [Colors.blue, Colors.green],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
           foregroundColor: Colors.black,
         ),
-        child: const MaterialApp(
-          // Your app code
-        ),
-      );
-    }
+      ),
+    ],
+  ),
+  home: ...,
+)
 ```
-### 2. Using GradientElevatedButton with Theme
 
-Once you've defined the theme, you can directly use `GradientElevatedButton` with the inherited gradient feature from `GradientButtonThemeData`.
+Then use `GradientElevatedButton` as usual:
 
 ```dart
-    Widget gradientButton = GradientElevatedButton(
-      onPressed: () {},
-      child: const Text("This is Gradient Elevated Button From Theme"),
-    );
+GradientElevatedButton(
+  onPressed: () {},
+  child: Text('Themed Gradient Button'),
+)
 ```
+
+### 2. [DEPRECATED] Using GradientButtonThemeData
+
+`GradientButtonThemeData` is deprecated and will be removed in a future release. Migrate to ThemeExtension as shown above.
+
+```dart
+// Deprecated usage:
+GradientButtonThemeData(
+  data: GradientElevatedButton.styleFrom(
+    backgroundGradient: const LinearGradient(
+      colors: [Colors.blue, Colors.green],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+    ),
+    foregroundColor: Colors.black,
+  ),
+  child: MaterialApp(
+    // ...
+  ),
+)
+```
+
 ### 3. Using GradientElevatedButton.styleFrom
 
 Alternatively, you can style the `GradientElevatedButton` directly using `GradientElevatedButton.styleFrom` to define the button's gradient, shape, and other properties:
@@ -123,6 +145,16 @@ You can fully customize the GradientElevatedButton using the following propertie
 - **elevation**: Controls the button's elevation (default: 2).
 - **onPressed**: The callback function that is called when the button is pressed.
 
+## Migration Guide
+
+To migrate from `GradientButtonThemeData` to the new `ThemeExtension` approach:
+1. Remove `GradientButtonThemeData` from your widget tree.
+2. Add `GradientButtonThemeExtension` to your `ThemeData.extensions`.
+3. Use `GradientButtonThemeExtension.of(context)` to access the style if needed.
+4. All `GradientElevatedButton` widgets will now use the theme from the extension.
+
+See the example and code comments for more details.
+
 ## Example
 
 [click here](https://github.com/ChegzDev/gradient_elevated_button/blob/master/example/lib/main.dart) for example
@@ -138,5 +170,3 @@ For suggestions or further feedback, feel free to send an email to __chegz.dev@g
 
 ![contributors](https://contributors-img.firebaseapp.com/image?repo=ChegzDev/gradient_elevated_button)
 <a href="https://github.com/aissat/ChegzDev/gradient_elevated_button/graphs/contributors"></a>
-
-

@@ -1,10 +1,24 @@
 part of '../gradient_elevated_button.dart';
 
-/// A widget that provides a way to define a global style for [GradientElevatedButton]
-/// widgets within the widget tree.
+/// {@template gradient_button_theme_data_deprecated}
+/// DEPRECATED: Use [GradientButtonThemeExtension] with [ThemeData.extensions] instead.
 ///
-/// This widget allows you to specify a [GradientButtonStyle] that can be applied
-/// to all [GradientElevatedButton] widgets within its scope.
+/// This widget provides a way to define a global style for [GradientElevatedButton]
+/// widgets within the widget tree. It will be removed in a future release.
+///
+/// Migrate to using [ThemeExtension] in your [ThemeData]:
+///
+/// ```dart
+/// ThemeData(
+///   extensions: <ThemeExtension<dynamic>>[
+///     GradientButtonThemeExtension(
+///       style: ...,
+///     ),
+///   ],
+/// )
+/// ```
+/// {@endtemplate}
+@Deprecated('Use ThemeExtension<GradientButtonThemeExtension> in ThemeData.extensions instead. Will be removed in a future release.')
 class GradientButtonThemeData extends InheritedWidget {
   /// The [GradientButtonStyle] data that will be applied to [GradientElevatedButton]s.
   final GradientButtonStyle? data;
@@ -18,22 +32,45 @@ class GradientButtonThemeData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    /// Returns `true` to notify dependent widgets that the theme data has changed.
     return true;
   }
 
   /// A helper method to retrieve the [GradientButtonStyle] from the closest
   /// [GradientButtonThemeData] widget in the widget tree.
   ///
-  /// This allows the [GradientElevatedButton] widgets to use the inherited style
-  /// defined by [GradientButtonThemeData].
-  ///
   /// Returns `null` if no [GradientButtonThemeData] is found in the widget tree.
   static GradientButtonStyle? of(BuildContext context) {
-    /// This line is where we access the data from the InheritedWidget.
     return context
         .dependOnInheritedWidgetOfExactType<GradientButtonThemeData>()
         ?.data;
+  }
+}
+
+/// A [ThemeExtension] for gradient button theming. Use this in ThemeData.extensions.
+@immutable
+class GradientButtonThemeExtension extends ThemeExtension<GradientButtonThemeExtension> {
+  final GradientButtonStyle? style;
+
+  const GradientButtonThemeExtension({this.style});
+
+  @override
+  GradientButtonThemeExtension copyWith({GradientButtonStyle? style}) {
+    return GradientButtonThemeExtension(
+      style: style ?? this.style,
+    );
+  }
+
+  @override
+  GradientButtonThemeExtension lerp(ThemeExtension<GradientButtonThemeExtension>? other, double t) {
+    if (other is! GradientButtonThemeExtension) return this;
+    return GradientButtonThemeExtension(
+      style: GradientButtonStyle.ler(this.style, other.style, t),
+    );
+  }
+
+  static GradientButtonStyle? of(BuildContext context) {
+    final ext = Theme.of(context).extension<GradientButtonThemeExtension>();
+    return ext?.style;
   }
 }
 

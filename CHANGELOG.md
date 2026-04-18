@@ -1,3 +1,10 @@
+## 1.2.0
+
+- Deprecated `GradientButtonThemeData`. Use `GradientButtonThemeExtension` (ThemeExtension) in ThemeData.extensions instead.
+- Added migration guide and updated documentation/examples to use ThemeExtension approach.
+- Maintained backward compatibility for one major release.
+
+
 ## 1.1.0
 
 - Updated for latest Flutter compatibility.

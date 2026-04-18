@@ -10,28 +10,44 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Setup GradientButtonThemeData for simplify the code
-    return GradientButtonThemeData(
-      data: GradientElevatedButton.styleFrom(
-        backgroundGradient: const LinearGradient(
-          colors: [Colors.blue, Colors.green],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-        foregroundColor: Colors.black,
+    // Preferred: Use ThemeExtension for gradient button theming
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Gradient Elevated Button',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        colorScheme: const ColorScheme.light(
+            primary: Color(0xED1313F1),
+            secondary: Color.fromARGB(255, 0, 175, 173)),
+        extensions: <ThemeExtension<dynamic>>[
+          GradientButtonThemeExtension(
+            style: GradientElevatedButton.styleFrom(
+              backgroundGradient: const LinearGradient(
+                colors: [Colors.red, Colors.yellow],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              foregroundColor: Colors.black,
+            ),
+          ),
+        ],
       ),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Gradient Elevated Button',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          colorScheme: const ColorScheme.light(
-              primary: Color(0xED1313F1),
-              secondary: Color.fromARGB(255, 0, 175, 173)),
-        ),
-        home: const MyHomePage(),
-      ),
+      home: const MyHomePage(),
     );
+    // Deprecated: Old way using GradientButtonThemeData (will be removed in future)
+    // return GradientButtonThemeData(
+    //   data: GradientElevatedButton.styleFrom(
+    //     backgroundGradient: const LinearGradient(
+    //       colors: [Colors.blue, Colors.green],
+    //       begin: Alignment.centerLeft,
+    //       end: Alignment.centerRight,
+    //     ),
+    //     foregroundColor: Colors.black,
+    //   ),
+    //   child: MaterialApp(
+    //     ...
+    //   ),
+    // );
   }
 }
 
