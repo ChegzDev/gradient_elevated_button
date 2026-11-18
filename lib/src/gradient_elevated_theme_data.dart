@@ -116,7 +116,7 @@ class GradientButtonTheme extends InheritedTheme {
   }
 
   @override
-  bool updateShouldNotify(ElevatedButtonTheme oldWidget) =>
+  bool updateShouldNotify(GradientButtonTheme oldWidget) =>
       data.style != oldWidget.data.style;
 }
 

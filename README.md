@@ -4,7 +4,6 @@
 [![License](https://img.shields.io/github/license/ChegzDev/gradient_elevated_button)](https://github.com/ChegzDev/gradient_elevated_button/blob/master/LICENSE)
 [![Likes](https://img.shields.io/pub/likes/gradient_elevated_button)](https://pub.dev/packages/gradient_elevated_button/score)
 [![Points](https://img.shields.io/pub/points/gradient_elevated_button)](https://pub.dev/packages/gradient_elevated_button/score)
-[![Popularity](https://img.shields.io/pub/popularity/gradient_elevated_button)](https://pub.dev/packages/gradient_elevated_button/score)
 
 [//]: # ([![Publisher]&#40;https://img.shields.io/pub/publisher/gradient_elevated_button&#41;]&#40;fsd&#41;)
 
@@ -48,9 +47,18 @@ A customizable elevated button with gradient support for your Flutter applicatio
 
 ![](screen_shot/sample.png)
 
-## Requirements
+## Which version to use
 
-Version 2.0.0 and later is built on [`material_ui`](https://pub.dev/packages/material_ui), the standalone Material library that replaces `package:flutter/material.dart`. It requires **Flutter 3.47+** and **Dart 3.13+**. If you are on an older Flutter version, use `gradient_elevated_button: ^1.2.0`.
+| Your app imports | Use | Requires |
+|---|---|---|
+| `package:material_ui/material_ui.dart` | `gradient_elevated_button: ^2.0.1` | Flutter 3.47+ |
+| `package:flutter/material.dart` | `gradient_elevated_button: ^1.2.1` | Flutter 3.27+ |
+
+Both versions have the same features and fixes. Since Flutter 3.47, `package:flutter/material.dart` is deprecated in favour of the separate [`material_ui`](https://pub.dev/packages/material_ui) package, and the two libraries use different `ThemeData`, `ThemeExtension` and `ButtonStyle` types. With 2.x in an app that still uses `package:flutter/material.dart`, the button itself renders, but adding `GradientButtonThemeExtension` to your `ThemeData.extensions` is a compile error, and `MaterialUiCompatibilityBridge` does not help in that direction. Use 1.2.x in that case, or migrate your whole app to `material_ui` first:
+
+```sh
+dart fix --apply --code=migrate_design_widgets
+```
 
 ## Usage
 
@@ -113,29 +121,29 @@ GradientButtonThemeData(
 Alternatively, you can style the `GradientElevatedButton` directly using `GradientElevatedButton.styleFrom` to define the button's gradient, shape, and other properties:
 
 ```dart
-
 Widget gradientWidget = GradientElevatedButton(
-  onPressed: () {
-
-  },
+  onPressed: () {},
   style: GradientElevatedButton.styleFrom(
-    gradient: const LinearGradient(colors: [
-      Color.fromARGB(255, 166, 206, 57),
-      Color.fromARGB(255, 0, 175, 173),
-    ],
-      disabledGradient: const LinearGradient(colors: [
+    backgroundGradient: const LinearGradient(
+      colors: [
+        Color.fromARGB(255, 166, 206, 57),
+        Color.fromARGB(255, 0, 175, 173),
+      ],
+    ),
+    disabledBackgroundGradient: LinearGradient(
+      colors: [
         Colors.grey.withAlpha(200),
         Colors.grey,
         Colors.grey.withAlpha(200),
       ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
     ),
+    foregroundColor: Colors.white,
   ),
   child: const Text("This is Gradient Elevated Button"),
 );
-```  
+```
 
 ## Customization
 You can fully customize the GradientElevatedButton using the following properties:
@@ -151,22 +159,22 @@ You can fully customize the GradientElevatedButton using the following propertie
 
 ## Migration Guide
 
-### Upgrading to 2.0.0 (material_ui)
+### Upgrading to 2.x (material_ui)
 
-`material_ui` defines its own `ThemeData`, `ButtonStyle` and other Material types, separate from those in `package:flutter/material.dart`. To use 2.0.0:
+`material_ui` defines its own `ThemeData`, `ButtonStyle` and other Material
+types, separate from those in `package:flutter/material.dart`, so 2.x needs an
+app that uses `material_ui` throughout:
 
-1. Migrate your app to `material_ui` (recommended):
+1. Migrate your app:
    ```sh
    dart fix --apply --code=migrate_design_widgets
    ```
-   This adds `material_ui` to your `pubspec.yaml` and rewrites `package:flutter/material.dart` imports to `package:material_ui/material_ui.dart`.
-2. If your app (or another package) still uses `package:flutter/material.dart`, wrap your app with `MaterialUiCompatibilityBridge` so themes resolve correctly:
-   ```dart
-   MaterialApp(
-     builder: (context, child) => MaterialUiCompatibilityBridge(child: child!),
-     home: const HomeScreen(),
-   );
-   ```
+   This adds `material_ui` to your `pubspec.yaml` and rewrites
+   `package:flutter/material.dart` imports to `package:material_ui/material_ui.dart`.
+2. Change the dependency to `gradient_elevated_button: ^2.0.1`.
+
+If you can't migrate yet, stay on `gradient_elevated_button: ^1.2.1`; it has
+the same features and fixes.
 
 ### From GradientButtonThemeData to ThemeExtension
 

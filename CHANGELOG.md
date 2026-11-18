@@ -1,3 +1,11 @@
+## 2.0.1
+
+For apps on `material_ui` (Flutter 3.47+). The same fixes are in 1.2.1 for apps on `package:flutter/material.dart`.
+
+- Fixed a crash (`type 'GradientButtonTheme' is not a subtype of type 'ElevatedButtonTheme'`) when a `GradientButtonTheme` is rebuilt with new data.
+- README: corrected the compatibility guidance. `MaterialUiCompatibilityBridge` does not make 2.x usable in apps on `package:flutter/material.dart`; use 1.2.x there. Added a "Which version to use" table, fixed the `styleFrom` example, removed the discontinued popularity badge.
+- Added widget tests (gradient, disabled state, theme extension, theme animation, deprecated `GradientButtonThemeData`, `GradientButtonTheme`, states controller, `.icon`).
+
 ## 2.0.0
 
 - **Breaking:** Migrated from the deprecated `package:flutter/material.dart` to the standalone [`material_ui`](https://pub.dev/packages/material_ui) package.
