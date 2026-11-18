@@ -1,3 +1,10 @@
+## 2.0.0
+
+- **Breaking:** Migrated from the deprecated `package:flutter/material.dart` to the standalone [`material_ui`](https://pub.dev/packages/material_ui) package.
+- Minimum SDK raised to Flutter 3.47.0 / Dart 3.13.0. Apps still on `package:flutter/material.dart` should migrate with `dart fix --apply --code=migrate_design_widgets` or wrap with `MaterialUiCompatibilityBridge` (see README).
+- Fixed static analysis issues (unnecessary `this.` qualifier, formatting).
+- Example app migrated to `material_ui`; replaced stale example widget test.
+
 ## 1.2.0
 
 - Deprecated `GradientButtonThemeData`. Use `GradientButtonThemeExtension` (ThemeExtension) in ThemeData.extensions instead.

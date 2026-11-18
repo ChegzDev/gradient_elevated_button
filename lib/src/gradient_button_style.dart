@@ -2,8 +2,10 @@ part of '../gradient_elevated_button.dart';
 
 class GradientButtonStyle extends ButtonStyle {
   final WidgetStateProperty<Gradient?>? backgroundGradient;
-  @Deprecated('Use `backgroundGradient` instead. '
-      'This feature was deprecated after v1.0.5')
+  @Deprecated(
+    'Use `backgroundGradient` instead. '
+    'This feature was deprecated after v1.0.5',
+  )
   final WidgetStateProperty<Gradient?>? gradient;
   const GradientButtonStyle({
     this.backgroundGradient,
@@ -36,8 +38,10 @@ class GradientButtonStyle extends ButtonStyle {
   GradientButtonStyle copyWiths({
     WidgetStateProperty<TextStyle?>? textStyle,
     WidgetStateProperty<Gradient?>? backgroundGradient,
-    @Deprecated('Use `backgroundGradient` instead. '
-        'This feature was deprecated after v1.0.5')
+    @Deprecated(
+      'Use `backgroundGradient` instead. '
+      'This feature was deprecated after v1.0.5',
+    )
     WidgetStateProperty<Gradient?>? gradient,
     WidgetStateProperty<Color?>? backgroundColor,
     WidgetStateProperty<Color?>? foregroundColor,
@@ -94,42 +98,105 @@ class GradientButtonStyle extends ButtonStyle {
   }
 
   static GradientButtonStyle? ler(
-      GradientButtonStyle? a, GradientButtonStyle? b, double t) {
+    GradientButtonStyle? a,
+    GradientButtonStyle? b,
+    double t,
+  ) {
     if (identical(a, b)) {
       return a;
     }
     return GradientButtonStyle(
       textStyle: WidgetStateProperty.lerp<TextStyle?>(
-          a?.textStyle, b?.textStyle, t, TextStyle.lerp),
+        a?.textStyle,
+        b?.textStyle,
+        t,
+        TextStyle.lerp,
+      ),
       backgroundGradient: WidgetStateProperty.lerp<Gradient?>(
-          a?.backgroundGradient, b?.backgroundGradient, t, Gradient.lerp),
+        a?.backgroundGradient,
+        b?.backgroundGradient,
+        t,
+        Gradient.lerp,
+      ),
       gradient: WidgetStateProperty.lerp<Gradient?>(
-          a?.backgroundGradient, b?.backgroundGradient, t, Gradient.lerp),
+        a?.backgroundGradient,
+        b?.backgroundGradient,
+        t,
+        Gradient.lerp,
+      ),
       foregroundColor: WidgetStateProperty.lerp<Color?>(
-          a?.foregroundColor, b?.foregroundColor, t, Color.lerp),
+        a?.foregroundColor,
+        b?.foregroundColor,
+        t,
+        Color.lerp,
+      ),
       overlayColor: WidgetStateProperty.lerp<Color?>(
-          a?.overlayColor, b?.overlayColor, t, Color.lerp),
+        a?.overlayColor,
+        b?.overlayColor,
+        t,
+        Color.lerp,
+      ),
       shadowColor: WidgetStateProperty.lerp<Color?>(
-          a?.shadowColor, b?.shadowColor, t, Color.lerp),
+        a?.shadowColor,
+        b?.shadowColor,
+        t,
+        Color.lerp,
+      ),
       surfaceTintColor: WidgetStateProperty.lerp<Color?>(
-          a?.surfaceTintColor, b?.surfaceTintColor, t, Color.lerp),
+        a?.surfaceTintColor,
+        b?.surfaceTintColor,
+        t,
+        Color.lerp,
+      ),
       elevation: WidgetStateProperty.lerp<double?>(
-          a?.elevation, b?.elevation, t, lerpDouble),
+        a?.elevation,
+        b?.elevation,
+        t,
+        lerpDouble,
+      ),
       padding: WidgetStateProperty.lerp<EdgeInsetsGeometry?>(
-          a?.padding, b?.padding, t, EdgeInsetsGeometry.lerp),
+        a?.padding,
+        b?.padding,
+        t,
+        EdgeInsetsGeometry.lerp,
+      ),
       minimumSize: WidgetStateProperty.lerp<Size?>(
-          a?.minimumSize, b?.minimumSize, t, Size.lerp),
+        a?.minimumSize,
+        b?.minimumSize,
+        t,
+        Size.lerp,
+      ),
       fixedSize: WidgetStateProperty.lerp<Size?>(
-          a?.fixedSize, b?.fixedSize, t, Size.lerp),
+        a?.fixedSize,
+        b?.fixedSize,
+        t,
+        Size.lerp,
+      ),
       maximumSize: WidgetStateProperty.lerp<Size?>(
-          a?.maximumSize, b?.maximumSize, t, Size.lerp),
+        a?.maximumSize,
+        b?.maximumSize,
+        t,
+        Size.lerp,
+      ),
       iconColor: WidgetStateProperty.lerp<Color?>(
-          a?.iconColor, b?.iconColor, t, Color.lerp),
+        a?.iconColor,
+        b?.iconColor,
+        t,
+        Color.lerp,
+      ),
       iconSize: WidgetStateProperty.lerp<double?>(
-          a?.iconSize, b?.iconSize, t, lerpDouble),
+        a?.iconSize,
+        b?.iconSize,
+        t,
+        lerpDouble,
+      ),
       side: _lerSides(a?.side, b?.side, t),
       shape: WidgetStateProperty.lerp<OutlinedBorder?>(
-          a?.shape, b?.shape, t, OutlinedBorder.lerp),
+        a?.shape,
+        b?.shape,
+        t,
+        OutlinedBorder.lerp,
+      ),
       mouseCursor: t < 0.5 ? a?.mouseCursor : b?.mouseCursor,
       visualDensity: t < 0.5 ? a?.visualDensity : b?.visualDensity,
       tapTargetSize: t < 0.5 ? a?.tapTargetSize : b?.tapTargetSize,
@@ -143,9 +210,10 @@ class GradientButtonStyle extends ButtonStyle {
   }
 
   static WidgetStateProperty<BorderSide?>? _lerSides(
-      WidgetStateProperty<BorderSide?>? a,
-      WidgetStateProperty<BorderSide?>? b,
-      double t) {
+    WidgetStateProperty<BorderSide?>? a,
+    WidgetStateProperty<BorderSide?>? b,
+    double t,
+  ) {
     if (a == null && b == null) {
       return null;
     }
@@ -184,11 +252,13 @@ class GradientButtonStyle extends ButtonStyle {
   }
 
   static WidgetStateProperty<Gradient?>? convertToGradient(
-      WidgetStateProperty<Color?>? backgroundColor) {
+    WidgetStateProperty<Color?>? backgroundColor,
+  ) {
     if (backgroundColor == null) return null;
 
-    return WidgetStateProperty.resolveWith<Gradient?>(
-        (Set<WidgetState> states) {
+    return WidgetStateProperty.resolveWith<Gradient?>((
+      Set<WidgetState> states,
+    ) {
       // Resolve the color for the current state
       final Color? color = backgroundColor.resolve(states);
       if (color == null) return null;

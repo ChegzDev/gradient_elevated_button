@@ -18,7 +18,9 @@ part of '../gradient_elevated_button.dart';
 /// )
 /// ```
 /// {@endtemplate}
-@Deprecated('Use ThemeExtension<GradientButtonThemeExtension> in ThemeData.extensions instead. Will be removed in a future release.')
+@Deprecated(
+  'Use ThemeExtension<GradientButtonThemeExtension> in ThemeData.extensions instead. Will be removed in a future release.',
+)
 class GradientButtonThemeData extends InheritedWidget {
   /// The [GradientButtonStyle] data that will be applied to [GradientElevatedButton]s.
   final GradientButtonStyle? data;
@@ -48,23 +50,25 @@ class GradientButtonThemeData extends InheritedWidget {
 
 /// A [ThemeExtension] for gradient button theming. Use this in ThemeData.extensions.
 @immutable
-class GradientButtonThemeExtension extends ThemeExtension<GradientButtonThemeExtension> {
+class GradientButtonThemeExtension
+    extends ThemeExtension<GradientButtonThemeExtension> {
   final GradientButtonStyle? style;
 
   const GradientButtonThemeExtension({this.style});
 
   @override
   GradientButtonThemeExtension copyWith({GradientButtonStyle? style}) {
-    return GradientButtonThemeExtension(
-      style: style ?? this.style,
-    );
+    return GradientButtonThemeExtension(style: style ?? this.style);
   }
 
   @override
-  GradientButtonThemeExtension lerp(ThemeExtension<GradientButtonThemeExtension>? other, double t) {
+  GradientButtonThemeExtension lerp(
+    ThemeExtension<GradientButtonThemeExtension>? other,
+    double t,
+  ) {
     if (other is! GradientButtonThemeExtension) return this;
     return GradientButtonThemeExtension(
-      style: GradientButtonStyle.ler(this.style, other.style, t),
+      style: GradientButtonStyle.ler(style, other.style, t),
     );
   }
 
@@ -96,12 +100,14 @@ class GradientButtonTheme extends InheritedTheme {
   /// ElevatedButtonThemeData theme = ElevatedButtonTheme.of(context);
   /// ```
   static GradientElevatedButtonThemeData? of(BuildContext context) {
-    final GradientButtonTheme? buttonTheme =
-        context.dependOnInheritedWidgetOfExactType<GradientButtonTheme>();
+    final GradientButtonTheme? buttonTheme = context
+        .dependOnInheritedWidgetOfExactType<GradientButtonTheme>();
     return buttonTheme?.data ??
         GradientElevatedButtonThemeData(
-            style: GradientButtonStyle.fromElevatedButtonStyle(
-                Theme.of(context).elevatedButtonTheme.style));
+          style: GradientButtonStyle.fromElevatedButtonStyle(
+            Theme.of(context).elevatedButtonTheme.style,
+          ),
+        );
   }
 
   @override
@@ -132,9 +138,10 @@ class GradientElevatedButtonThemeData with Diagnosticable {
 
   /// Linearly interpolate between two elevated button themes.
   static GradientElevatedButtonThemeData? lerp(
-      GradientElevatedButtonThemeData? a,
-      GradientElevatedButtonThemeData? b,
-      double t) {
+    GradientElevatedButtonThemeData? a,
+    GradientElevatedButtonThemeData? b,
+    double t,
+  ) {
     if (identical(a, b)) {
       return a;
     }
@@ -161,6 +168,7 @@ class GradientElevatedButtonThemeData with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
-        DiagnosticsProperty<ButtonStyle>('style', style, defaultValue: null));
+      DiagnosticsProperty<ButtonStyle>('style', style, defaultValue: null),
+    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:gradient_elevated_button/gradient_elevated_button.dart';
 
 void main() {
@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         colorScheme: const ColorScheme.light(
-            primary: Color(0xED1313F1),
-            secondary: Color.fromARGB(255, 0, 175, 173)),
+          primary: Color(0xED1313F1),
+          secondary: Color.fromARGB(255, 0, 175, 173),
+        ),
         extensions: <ThemeExtension<dynamic>>[
           GradientButtonThemeExtension(
             style: GradientElevatedButton.styleFrom(
@@ -52,9 +53,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-  });
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -64,9 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Gradient Elevated Button'),
-      ),
+      appBar: AppBar(title: const Text('Gradient Elevated Button')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -75,13 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
               title: "USE from `GradientButtonThemeData`",
               child: GradientElevatedButton(
                 onPressed: () {},
-                child:
-                    const Text("This is Gradient Elevated Button From Theme"),
+                child: const Text(
+                  "This is Gradient Elevated Button From Theme",
+                ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Sample(
               title: "USE `GradientElevatedButton.styleFrom`",
               child: GradientElevatedButton(
@@ -89,10 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {},
                 style: GradientElevatedButton.styleFrom(
                   backgroundGradient: const LinearGradient(
-                    colors: [
-                      Color(0xFFF84040),
-                      Color(0xFF73A331),
-                    ],
+                    colors: [Color(0xFFF84040), Color(0xFF73A331)],
                     begin: Alignment.centerRight,
                     end: Alignment.centerLeft,
                   ),
@@ -100,12 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   foregroundColor: Colors.white,
                 ),
                 child: const Text(
-                    "This is GradientElevatedButton using styleFrom"),
+                  "This is GradientElevatedButton using styleFrom",
+                ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Sample(
               title: "USE `GradientElevatedButton.icon`",
               child: GradientElevatedButton.icon(
@@ -114,10 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: GradientElevatedButton.styleFrom(
                   shadowColor: Colors.blue,
                   backgroundGradient: const LinearGradient(
-                    colors: [
-                      Color(0xFFF84040),
-                      Color(0xFF73A331),
-                    ],
+                    colors: [Color(0xFFF84040), Color(0xFF73A331)],
                     begin: Alignment.centerRight,
                     end: Alignment.centerLeft,
                   ),
@@ -128,9 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: Text("Add"),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Sample(
               title: "USE disabled `GradientElevatedButton`",
               child: GradientElevatedButton(
@@ -150,7 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   foregroundColor: Colors.white,
                 ),
                 child: const Text(
-                    "This is GradientElevatedButton using styleFrom"),
+                  "This is GradientElevatedButton using styleFrom",
+                ),
               ),
             ),
           ],
@@ -175,14 +163,9 @@ class Sample extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              title,
-              style: TextTheme.of(context).titleMedium,
-            ),
+            child: Text(title, style: TextTheme.of(context).titleMedium),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           child,
         ],
       ),
