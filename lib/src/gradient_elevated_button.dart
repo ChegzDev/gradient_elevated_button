@@ -202,7 +202,8 @@ class GradientElevatedButton extends GradientButtonStyleButton {
     )) {
       (null, null) => null,
       (_, Color(a: 0.0)) => WidgetStatePropertyAll<Color?>(overlayColor),
-      (_, final Color color) || (final Color color, _) =>
+      (_, final Color color) ||
+      (final Color color, _) =>
         WidgetStateProperty<Color?>.fromMap(<WidgetState, Color?>{
           WidgetState.pressed: color.withOpacityDeprecated(0.1),
           WidgetState.hovered: color.withOpacityDeprecated(0.08),
@@ -410,8 +411,8 @@ class GradientElevatedButton extends GradientButtonStyleButton {
             disabledIconColor: colorScheme.onSurface.withOpacityDeprecated(
               0.38,
             ),
-            disabledForegroundColor: colorScheme.onSurface
-                .withOpacityDeprecated(0.38),
+            disabledForegroundColor:
+                colorScheme.onSurface.withOpacityDeprecated(0.38),
             shadowColor: theme.shadowColor,
             elevation: 2,
             textStyle: theme.textTheme.labelLarge,
@@ -471,14 +472,14 @@ class _GradientElevatedButtonWithIcon extends GradientElevatedButton {
     required Widget label,
     super.iconAlignment,
   }) : super(
-         autofocus: autofocus ?? false,
-         child: _GradientElevatedButtonWithIconChild(
-           icon: icon,
-           label: label,
-           buttonStyle: style,
-           iconAlignment: iconAlignment,
-         ),
-       );
+          autofocus: autofocus ?? false,
+          child: _GradientElevatedButtonWithIconChild(
+            icon: icon,
+            label: label,
+            buttonStyle: style,
+            iconAlignment: iconAlignment,
+          ),
+        );
 
   @override
   GradientButtonStyle defaultStyleOf(BuildContext context) {
@@ -525,9 +526,8 @@ class _GradientElevatedButtonWithIconChild extends StatelessWidget {
   Widget build(BuildContext context) {
     final double defaultFontSize =
         buttonStyle?.textStyle?.resolve(const <WidgetState>{})?.fontSize ??
-        14.0;
-    final double scale =
-        clampDouble(
+            14.0;
+    final double scale = clampDouble(
           MediaQuery.textScalerOf(context).scale(defaultFontSize) / 14.0,
           1.0,
           2.0,
@@ -552,11 +552,11 @@ class _GradientElevatedButtonWithIconChild extends StatelessWidget {
 
 class _GradientElevatedButtonDefaultsM3 extends GradientButtonStyle {
   _GradientElevatedButtonDefaultsM3(this.context)
-    : super(
-        animationDuration: kThemeChangeDuration,
-        enableFeedback: true,
-        alignment: Alignment.center,
-      );
+      : super(
+          animationDuration: kThemeChangeDuration,
+          enableFeedback: true,
+          alignment: Alignment.center,
+        );
 
   final BuildContext context;
   late final ColorScheme _colors = Theme.of(context).colorScheme;

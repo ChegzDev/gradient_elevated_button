@@ -273,15 +273,15 @@ abstract class GradientButtonStyleButton extends StatefulWidget {
     return switch (fontSizeMultiplier) {
       <= 1 => geometry1x,
       < 2 => EdgeInsetsGeometry.lerp(
-        geometry1x,
-        geometry2x,
-        fontSizeMultiplier - 1,
-      )!,
+          geometry1x,
+          geometry2x,
+          fontSizeMultiplier - 1,
+        )!,
       < 3 => EdgeInsetsGeometry.lerp(
-        geometry2x,
-        geometry3x,
-        fontSizeMultiplier - 2,
-      )!,
+          geometry2x,
+          geometry3x,
+          fontSizeMultiplier - 2,
+        )!,
       _ => geometry3x,
     };
   }
@@ -358,10 +358,10 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
     final GradientButtonStyle? widgetStyle = widget.style;
     final GradientButtonStyle? primaryStyle =
         GradientButtonThemeExtension.of(context) ??
-        GradientButtonThemeData.of(
-          context,
-        ) ?? // fallback for backward compatibility
-        widget.themeStyleOf(context);
+            GradientButtonThemeData.of(
+              context,
+            ) ?? // fallback for backward compatibility
+            widget.themeStyleOf(context);
     final GradientButtonStyle defaultStyle = widget.defaultStyleOf(context);
     T? effectiveValue<T>(T? Function(GradientButtonStyle? style) getProperty) {
       final T? widgetValue = getProperty(widgetStyle);
@@ -386,8 +386,7 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
       (GradientButtonStyle? style) => style?.textStyle,
     );
 
-    Gradient? resolvedBackgroundGradient =
-        resolve<Gradient?>(
+    Gradient? resolvedBackgroundGradient = resolve<Gradient?>(
           (GradientButtonStyle? style) => style?.backgroundGradient,
         ) ??
         resolve<Gradient?>(
@@ -436,11 +435,10 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
 
     final WidgetStateProperty<Color?> overlayColor =
         WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) => effectiveValue(
-            (GradientButtonStyle? style) =>
-                style?.overlayColor?.resolve(states),
-          ),
-        );
+      (Set<WidgetState> states) => effectiveValue(
+        (GradientButtonStyle? style) => style?.overlayColor?.resolve(states),
+      ),
+    );
 
     final VisualDensity? resolvedVisualDensity = effectiveValue(
       (GradientButtonStyle? style) => style?.visualDensity,
@@ -469,21 +467,20 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
       (GradientButtonStyle? style) => style?.foregroundBuilder,
     );
 
-    final Clip effectiveClipBehavior =
-        widget.clipBehavior ??
+    final Clip effectiveClipBehavior = widget.clipBehavior ??
         ((resolvedBackgroundBuilder ?? resolvedForegroundBuilder) != null
             ? Clip.antiAlias
             : Clip.none);
 
-    BoxConstraints effectiveConstraints = resolvedVisualDensity
-        .effectiveConstraints(
-          BoxConstraints(
-            minWidth: resolvedMinimumSize!.width,
-            minHeight: resolvedMinimumSize.height,
-            maxWidth: resolvedMaximumSize!.width,
-            maxHeight: resolvedMaximumSize.height,
-          ),
-        );
+    BoxConstraints effectiveConstraints =
+        resolvedVisualDensity.effectiveConstraints(
+      BoxConstraints(
+        minWidth: resolvedMinimumSize!.width,
+        minHeight: resolvedMinimumSize.height,
+        maxWidth: resolvedMaximumSize!.width,
+        maxHeight: resolvedMaximumSize.height,
+      ),
+    );
     if (resolvedFixedSize != null) {
       final Size size = effectiveConstraints.constrain(resolvedFixedSize);
       if (size.width.isFinite) {
@@ -525,15 +522,14 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
         resolvedElevation == 0) {
       if (controller?.duration != resolvedAnimationDuration) {
         controller?.dispose();
-        controller =
-            AnimationController(
-              duration: resolvedAnimationDuration,
-              vsync: this,
-            )..addStatusListener((AnimationStatus status) {
-              if (status == AnimationStatus.completed) {
-                setState(() {}); // Rebuild with the final background color.
-              }
-            });
+        controller = AnimationController(
+          duration: resolvedAnimationDuration,
+          vsync: this,
+        )..addStatusListener((AnimationStatus status) {
+            if (status == AnimationStatus.completed) {
+              setState(() {}); // Rebuild with the final background color.
+            }
+          });
       }
       resolvedBackgroundGradient =
           backgroundGradient; // Defer changing the background color.
@@ -577,14 +573,12 @@ class _GradientButtonStyleState extends State<GradientButtonStyleButton>
       shadowColor: resolvedShadowColor,
       color: Colors.transparent,
       clipBehavior: effectiveClipBehavior,
-      shape:
-          resolvedShape?.copyWith(side: resolvedSide) ??
+      shape: resolvedShape?.copyWith(side: resolvedSide) ??
           const RoundedRectangleBorder(),
       child: Container(
         decoration: ShapeDecoration(
           gradient: resolvedBackgroundGradient,
-          shape:
-              resolvedShape?.copyWith(side: resolvedSide) ??
+          shape: resolvedShape?.copyWith(side: resolvedSide) ??
               const RoundedRectangleBorder(),
         ),
         child: ConstrainedBox(

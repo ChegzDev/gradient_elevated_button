@@ -100,8 +100,8 @@ class GradientButtonTheme extends InheritedTheme {
   /// ElevatedButtonThemeData theme = ElevatedButtonTheme.of(context);
   /// ```
   static GradientElevatedButtonThemeData? of(BuildContext context) {
-    final GradientButtonTheme? buttonTheme = context
-        .dependOnInheritedWidgetOfExactType<GradientButtonTheme>();
+    final GradientButtonTheme? buttonTheme =
+        context.dependOnInheritedWidgetOfExactType<GradientButtonTheme>();
     return buttonTheme?.data ??
         GradientElevatedButtonThemeData(
           style: GradientButtonStyle.fromElevatedButtonStyle(

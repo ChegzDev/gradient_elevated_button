@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gradient_elevated_button/gradient_elevated_button.dart';
-import 'package:material_ui/material_ui.dart';
+// ignore: deprecated_member_use
+import 'package:flutter/material.dart';
 
 const _blueGreen = LinearGradient(colors: [Colors.blue, Colors.green]);
 const _redOrange = LinearGradient(colors: [Colors.red, Colors.orange]);
@@ -15,9 +16,9 @@ Gradient? _paintedGradient(WidgetTester tester, String label) {
 }
 
 Widget _app(Widget child, {ThemeData? theme}) => MaterialApp(
-  theme: theme,
-  home: Scaffold(body: Center(child: child)),
-);
+      theme: theme,
+      home: Scaffold(body: Center(child: child)),
+    );
 
 void main() {
   testWidgets('paints the style gradient and calls onPressed', (tester) async {
@@ -44,9 +45,8 @@ void main() {
     expect(taps, 1);
     expect(longPresses, 1);
 
-    final textColor = DefaultTextStyle.of(tester.element(find.text('Go')))
-        .style
-        .color;
+    final textColor =
+        DefaultTextStyle.of(tester.element(find.text('Go'))).style.color;
     expect(textColor, Colors.white);
   });
 
@@ -75,15 +75,15 @@ void main() {
 
   testWidgets('switches gradient when enabled changes', (tester) async {
     Widget button(VoidCallback? onPressed) => _app(
-      GradientElevatedButton(
-        onPressed: onPressed,
-        style: GradientElevatedButton.styleFrom(
-          backgroundGradient: _blueGreen,
-          disabledBackgroundGradient: _greys,
-        ),
-        child: const Text('B'),
-      ),
-    );
+          GradientElevatedButton(
+            onPressed: onPressed,
+            style: GradientElevatedButton.styleFrom(
+              backgroundGradient: _blueGreen,
+              disabledBackgroundGradient: _greys,
+            ),
+            child: const Text('B'),
+          ),
+        );
 
     await tester.pumpWidget(button(() {}));
     expect(_paintedGradient(tester, 'B'), _blueGreen);
@@ -159,13 +159,15 @@ void main() {
 
   testWidgets('GradientButtonTheme applies and can be rebuilt', (tester) async {
     Widget themed(Gradient gradient) => _app(
-      GradientButtonTheme(
-        data: GradientElevatedButtonThemeData(
-          style: GradientElevatedButton.styleFrom(backgroundGradient: gradient),
-        ),
-        child: GradientElevatedButton(onPressed: () {}, child: const Text('T')),
-      ),
-    );
+          GradientButtonTheme(
+            data: GradientElevatedButtonThemeData(
+              style: GradientElevatedButton.styleFrom(
+                  backgroundGradient: gradient),
+            ),
+            child: GradientElevatedButton(
+                onPressed: () {}, child: const Text('T')),
+          ),
+        );
 
     await tester.pumpWidget(themed(_blueGreen));
     expect(_paintedGradient(tester, 'T'), _blueGreen);
@@ -178,12 +180,12 @@ void main() {
     tester,
   ) async {
     ThemeData theme(Gradient g) => ThemeData(
-      extensions: <ThemeExtension<dynamic>>[
-        GradientButtonThemeExtension(
-          style: GradientElevatedButton.styleFrom(backgroundGradient: g),
-        ),
-      ],
-    );
+          extensions: <ThemeExtension<dynamic>>[
+            GradientButtonThemeExtension(
+              style: GradientElevatedButton.styleFrom(backgroundGradient: g),
+            ),
+          ],
+        );
 
     await tester.pumpWidget(
       _app(
@@ -238,13 +240,14 @@ void main() {
     addTearDown(second.dispose);
 
     Widget button(WidgetStatesController? c) => _app(
-      GradientElevatedButton(
-        onPressed: () {},
-        statesController: c,
-        style: GradientElevatedButton.styleFrom(backgroundGradient: _blueGreen),
-        child: const Text('S'),
-      ),
-    );
+          GradientElevatedButton(
+            onPressed: () {},
+            statesController: c,
+            style: GradientElevatedButton.styleFrom(
+                backgroundGradient: _blueGreen),
+            child: const Text('S'),
+          ),
+        );
 
     await tester.pumpWidget(button(first));
     await tester.pumpWidget(button(second));
